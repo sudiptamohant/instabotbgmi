@@ -1,0 +1,28 @@
+name: Run Command
+
+on:
+  workflow_dispatch:
+    inputs:
+      ip:
+        description: 'IP address'
+        required: true
+        type: string
+      port:
+        description: 'Port'
+        required: true
+        type: string
+      time:
+        description: 'Time in seconds'
+        required: true
+        type: string
+
+jobs:
+  run-command:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run Command
+        run: |
+          ./bgmi ${{ github.event.inputs.ip }} ${{ github.event.inputs.port }} ${{ github.event.inputs.time }} 100
